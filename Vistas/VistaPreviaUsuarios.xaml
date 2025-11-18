@@ -1,0 +1,69 @@
+﻿<Window x:Class="Vistas.VistaPreviaUsuarios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Vista Previa de Impresión" Height="600" Width="700"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource ColorFondo}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Plantillas/PlantillaMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <FlowDocumentReader Grid.Row="0" Name="fdvVisor">
+            <FlowDocument Name="docImprimir" ColumnWidth="600" FontSize="12" FontFamily="Montserrat">
+
+                <Paragraph TextAlignment="Center" Margin="0,0,0,20">
+                    <Run Text="Listado de Usuarios" 
+                         FontSize="20" 
+                         FontWeight="Bold" 
+                         Foreground="{StaticResource ColorPrimario}"/>
+                </Paragraph>
+
+                <Table Name="tblUsuarios" BorderBrush="{StaticResource ColorBordeInput}" BorderThickness="1" Background="White">
+                    <Table.Columns>
+                        <TableColumn Width="180"/>
+                        <TableColumn Width="150"/>
+                        <TableColumn Width="120"/>
+                    </Table.Columns>
+
+                    <TableRowGroup Name="rgUsuarios">
+                        <TableRow Background="{StaticResource ColorPrimario}" Foreground="White" FontWeight="Bold">
+                            <TableCell Padding="5">
+                                <Paragraph>Apellido y Nombre</Paragraph>
+                            </TableCell>
+                            <TableCell Padding="5">
+                                <Paragraph>Nombre de Usuario</Paragraph>
+                            </TableCell>
+                            <TableCell Padding="5">
+                                <Paragraph>Rol</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+
+            </FlowDocument>
+        </FlowDocumentReader>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Name="btnImprimir" Content="Imprimir" 
+                    Style="{StaticResource BotonGuardar}" 
+                    Margin="0,0,10,0"
+                    Click="btnImprimir_Click"/>
+
+            <Button Name="btnCerrar" Content="Cerrar" 
+                    Style="{StaticResource BotonCancelar}" 
+                    Click="btnCerrar_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -1,0 +1,21 @@
+﻿<Application x:Class="Vistas.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="Principal.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Plantillas/PlantillaTexbox.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="./Plantillas/PlantillaPasswordbox.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="./Plantillas/PlantillaBoton.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="./Plantillas/PlantillaMenu.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="./Plantillas/PlantillaComboBox.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="./Plantillas/PlantillaDatePicker.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="./Plantillas/PlantillaLabel.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="./Plantillas/PlantillaTextBlock.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="./Plantillas/PlantillaTextBoxError.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+         
+    </Application.Resources>
+</Application>

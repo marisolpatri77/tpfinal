@@ -1,0 +1,42 @@
+﻿<Window x:Class="Vistas.MessageBoxCustom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight"
+        Height="220" Width="400"
+        Background="Transparent">
+
+    <Border Background="White" BorderBrush="#990506" BorderThickness="2" CornerRadius="10">
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- TÍTULO -->
+            <Border Grid.Row="0" Background="#990506" CornerRadius="8,8,0,0" Margin="-2,-2,-2,0">
+                <TextBlock x:Name="txtTitle" Text="Título" 
+                          Foreground="White" FontSize="18" FontWeight="Bold"
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Margin="10" Padding="5"/>
+            </Border>
+
+            <!-- ICONO Y MENSAJE -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Margin="0,15,0,15">
+                
+                <TextBlock x:Name="txtMessage" TextWrapping="Wrap" 
+                          TextAlignment="Center" FontSize="16" Width="250"/>
+            </StackPanel>
+
+            <!-- BOTÓN -->
+            <Button x:Name="btnAceptar" Content="Aceptar" Grid.Row="2"
+                   Width="100" Height="35" HorizontalAlignment="Center"
+                   Click="btnAceptar_Click" Margin="0,10,0,5"
+                   Style="{StaticResource btnAceptar}"/>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,47 @@
+﻿<Window x:Class="Vistas.ABMUsuarios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:svc="clr-namespace:ClasesBase.DataAccess;assembly=ClasesBase"
+        xmlns:controles="clr-namespace:Vistas.ControlUsuario" 
+        Title="Administración de Usuarios" 
+        Height="520" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Background="{StaticResource ColorFondo}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Plantillas/PlantillaMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <ObjectDataProvider x:Key="LIST_USER"
+                                ObjectType="{x:Type svc:TrabajarUsuario}"
+                                MethodName="TraerUsuarios"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Name="pnlPrincipal" DataContext="{Binding Source={StaticResource LIST_USER}}" Margin="20">
+        <StackPanel>
+            <WrapPanel Margin="0,0,0,15" HorizontalAlignment="Center">
+                <Button Name="btnNuevo" Content="Nuevo" Style="{StaticResource BotonGuardar}" Margin="5"/>
+
+                <Button Name="btnModificar" Content="Modificar" Style="{StaticResource BotonAccesoRapido}" Margin="5"/>
+
+                <Button Name="btnEliminar" Content="Eliminar" Style="{StaticResource BotonCancelar}" Margin="5"/>
+                <Button Name="btnGuardar" Content="Guardar" IsEnabled="False" Style="{StaticResource BotonGuardar}" Margin="5"/>
+                <Button Name="btnCancelar" Content="Cancelar" IsEnabled="False" Style="{StaticResource BotonAccesoRapido}" Margin="5"/>
+
+                <Separator Width="20" Background="Transparent"/>
+
+                <Button Name="btnPrimero" Content="|&lt;" Margin="5" Width="40" Height="35" Click="btnPrimero_Click" Style="{StaticResource BotonAccesoRapido}"/>
+                <Button Name="btnAnterior" Content="&lt;" Margin="5" Width="40" Height="35" Click="btnAnterior_Click" Style="{StaticResource BotonAccesoRapido}"/>
+                <Button Name="btnSiguiente" Content="&gt;" Margin="5" Width="40" Height="35" Click="btnSiguiente_Click" Style="{StaticResource BotonAccesoRapido}"/>
+                <Button Name="btnUltimo" Content="&gt;|" Margin="5" Width="40" Height="35" Click="btnUltimo_Click" Style="{StaticResource BotonAccesoRapido}"/>
+            </WrapPanel>
+
+            <controles:AltaUsuario x:Name="ucAltaUsuario" IsEnabled="False"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

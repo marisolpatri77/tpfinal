@@ -1,0 +1,125 @@
+﻿<Window x:Class="Vistas.Principal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:control="clr-namespace:Vistas.ControlUsuario"
+        Title="Sistema de Gestión de Cursos"
+        Height="722" Width="1256"
+        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" WindowState="Maximized" Background="#f8f0ec">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Plantillas/PlantillaMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource HeaderBorder}">
+            <DockPanel Margin="20,15">
+                <Border DockPanel.Dock="Left" 
+                        Width="60" Height="60" 
+                        Background="White" 
+                        CornerRadius="8"
+                        Margin="0,0,20,0">
+                    <Image Source="/Images/logo-lujan.png" Stretch="Uniform"/>
+                </Border>
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="CLUB DEPORTIVO LUJAN"
+                               Foreground="White" FontSize="28" FontWeight="Bold" FontFamily="Montserrat"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Sistema de Gestión Académica"
+                               Foreground="#F0F0F0" FontSize="14" FontFamily="Montserrat"
+                               HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <Menu Grid.Row="1" Style="{StaticResource MenuPrincipal}">
+
+            <MenuItem Header="_Sistema" Style="{StaticResource MenuItemPrincipal}">
+
+                <MenuItem Header="Usuarios" x:Name="menuUsuarios" Style="{StaticResource MenuItemSubmenu}">
+
+                    <MenuItem Header="Alta Usuario" x:Name="menuAltaUsuario" Click="AltaUsuario_Click" Style="{StaticResource MenuItemSubmenu}"/>
+                    <MenuItem Header="ABM Usuarios" x:Name="menuABMUsuarios" Click="menuABMUsuarios_Click" Style="{StaticResource MenuItemSubmenu}"/>
+                    <MenuItem Header="Listado de Usuarios" x:Name="menuListadoUsuarios" Click="menuListadoUsuarios_Click" Style="{StaticResource MenuItemSubmenu}"/>
+                </MenuItem>
+                <MenuItem Header="Salir" x:Name="menuSalir" Click="menuSalir_Click" Style="{StaticResource MenuItemSubmenu}"/>
+            </MenuItem>
+
+            <MenuItem Header="_Académico" Style="{StaticResource MenuItemPrincipal}">
+                <MenuItem Header="Cursos" x:Name="menuCursos" Style="{StaticResource MenuItemSubmenu}">
+                    <MenuItem Header="Alta Curso" x:Name="menuAltaCurso" Click="AltaCurso_Click" Style="{StaticResource MenuItemSubmenu}"/>
+                    <MenuItem Header="Listar Cursos" x:Name="menuListarCursos" Click="menuListarCursos_Click" Style="{StaticResource MenuItemSubmenu}"/>    
+                </MenuItem>
+                <MenuItem Header="Docentes" x:Name="menuDocentes" Style="{StaticResource MenuItemSubmenu}">
+                    <MenuItem Header="Alta Docente" x:Name="menuAltaDocente" Click="AltaDocente_Click" Style="{StaticResource MenuItemSubmenu}"/>
+                    <MenuItem Header="Modificar Docente" x:Name="menuModificarDocente" Click="ModificarDocente_Click" Style="{StaticResource MenuItemSubmenu}"/>
+                </MenuItem>
+                <MenuItem Header="Alumnos" x:Name="menuAlumnos" Style="{StaticResource MenuItemSubmenu}">
+                    <MenuItem Header="Alta Alumno" x:Name="menuAltaAlumno" Click="AltaAlumno_Click" Style="{StaticResource MenuItemSubmenu}"/>
+                    <MenuItem Header="Modificar Alumno" x:Name="menuModificarAlumno" Click="ModificarAlumno_Click" Style="{StaticResource MenuItemSubmenu}"/>
+                </MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="_Inscripciones" x:Name="menuInscripciones"  Style="{StaticResource MenuItemPrincipal}">
+                <MenuItem Header="Alta Inscripcion" x:Name="menuAltaInscripcion" Click="menuInscripciones_Click" Style="{StaticResource MenuItemSubmenu}"/>
+            </MenuItem>
+            <MenuItem Header="_Reportes" x:Name="menuReportes" Click="menuReportes_Click" Style="{StaticResource MenuItemPrincipal}"/>
+        </Menu>
+
+        <Grid Grid.Row="2" Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource PanelLateral}" Margin="0,0,15,0">
+                <StackPanel Margin="20">
+                    <TextBlock Text="ACCESOS RÁPIDOS"
+                               FontFamily="Montserrat" FontWeight="Bold" FontSize="16"
+                               Foreground="{StaticResource ColorOscuro}"
+                               Margin="0,0,0,20" HorizontalAlignment="Center"/>
+
+                    <Button x:Name="btnNuevoAlumno" Content="Nuevo Alumno" Click="btnNuevoAlumno_Click" Style="{StaticResource BotonAccesoRapido}"/>
+                    <Button x:Name="btnNuevoCurso" Content="Nuevo Curso" Click="btnNuevoCurso_Click" Style="{StaticResource BotonAccesoRapido}"/>
+                    <Button x:Name="btnNuevoDocente" Content="Nuevo Docente" Click="btnNuevoDocente_Click" Style="{StaticResource BotonAccesoRapido}"/>
+                    <Button x:Name="btnEstadoCursos" Content="Estado de Cursos" Click="btnEstadoCursos_Click" Style="{StaticResource BotonAccesoRapido}"/>
+                    <Border Height="2" Background="{StaticResource ColorSecundario}" Margin="0,20,0,15" CornerRadius="1"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource AreaContenido}">
+                <Grid x:Name="ContentArea">
+                    <StackPanel x:Name="PantallaBienvenida" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border Width="140" Height="140" Background="{StaticResource ColorFondo}"
+                                CornerRadius="70" BorderBrush="{StaticResource ColorSecundario}"
+                                BorderThickness="3" Margin="0,0,0,25">
+                            <Image Source="/Images/logo-lujan.png" Stretch="Uniform"/>
+                        </Border>
+
+                        <TextBlock Text="Bienvenido al Sistema de Gestión"
+                                   FontFamily="Montserrat" FontSize="28" FontWeight="Bold"
+                                   HorizontalAlignment="Center" Foreground="{StaticResource ColorPrimario}"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Club Deportivo Lujan"
+                                   FontFamily="Montserrat" FontSize="20" HorizontalAlignment="Center"
+                                   Foreground="{StaticResource ColorClaro}" Margin="0,0,0,25"/>
+                        <Border Background="{StaticResource ColorFondo}" CornerRadius="8" Padding="25,15">
+                            <TextBlock Text="Seleccione una opción del menú o use los accesos rápidos para comenzar"
+                                       FontFamily="Montserrat" FontSize="16" HorizontalAlignment="Center"
+                                       Foreground="Gray" TextWrapping="Wrap" MaxWidth="400" TextAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

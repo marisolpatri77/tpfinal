@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<estados>
+    <estado name="Programado"/>
+    <estado name="En_curso"/>
+    <estado name="Finalizado"/>
+    <estado name="Cancelado"/> 
+</estados>

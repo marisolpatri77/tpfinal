@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Vistas.ControlUsuario.Login"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="203" Width="460"
+             Background="{StaticResource FondoBrush}">
+
+    <Border Margin="20" CornerRadius="10" Background="White" BorderBrush="{StaticResource BordeBrush}" BorderThickness="1" Height="160" Width="402">
+        <Grid Margin="25" Height="115">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+           
+
+            <!-- ICONO Y CAMPO DE USUARIO -->
+            <Image Source="../Images/usuario.png" Width="40" Height="40" 
+                   Grid.Row="2" Grid.Column="0" 
+                   Margin="0,0,15,15"
+                   VerticalAlignment="Center"/>
+
+            <TextBox Name="txtUsuario" Grid.Row="2" Grid.Column="1"
+                     Height="45" Margin="0,0,0,15"
+                     Style="{StaticResource txt_plantillaStyle}" 
+                     VerticalAlignment="Center"
+                     Padding="15,5"
+                     FontSize="16"
+                     VerticalContentAlignment="Center"/>
+
+            <!-- ICONO Y CAMPO DE CONTRASEÑA -->
+            <Image Source="../Images/password.png" Width="40" Height="40" 
+                   Grid.Row="3" Grid.Column="0" 
+                   Margin="0,0,15,25"
+                   VerticalAlignment="Center"/>
+
+            <PasswordBox Name="txtPassword" Grid.Row="3" Grid.Column="1"
+                         Height="45" Margin="0,0,0,25"
+                         Style="{StaticResource pwd_plantillaStyle}"
+                         VerticalAlignment="Center"
+                         Padding="15,5"
+                         FontSize="16"
+                         VerticalContentAlignment="Center"
+                         KeyDown="txtPassword_KeyDown"/>
+
+            
+        </Grid>
+    </Border>
+</UserControl>

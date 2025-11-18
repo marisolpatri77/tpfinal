@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Vistas.ControlUsuario.MenuPrincipal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"  >
+    <Grid Height="38" Width="415">
+        <Menu DockPanel.Dock="Top" HorizontalAlignment="Center" 
+      Background="#990506" Foreground="White"
+      FontFamily="Segoe UI" Height="35">
+
+            <MenuItem Header="_Académico" Style="{StaticResource MenuItemPrincipal}">
+                <MenuItem Header="Curso" Style="{StaticResource MenuItemSubmenu}">
+                    <MenuItem Header="Alta Curso" Click="AltaCurso_Click" 
+                      Style="{StaticResource MenuItemSubmenu}"/>
+                </MenuItem>
+                <MenuItem Header="Docente" Style="{StaticResource MenuItemSubmenu}">
+                    <MenuItem Header="Alta Docente" Click="AltaDocente_Click"
+                      Style="{StaticResource MenuItemSubmenu}"/>
+                </MenuItem>
+                <MenuItem Header="Alumno" Style="{StaticResource MenuItemSubmenu}">
+                    <MenuItem Header="Alta Alumno" Click="AltaAlumno_Click"
+                      Style="{StaticResource MenuItemSubmenu}"/>
+                </MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="_Inscripciones" Style="{StaticResource MenuItemPrincipal}"/>
+            <MenuItem Header="_Reportes" Style="{StaticResource MenuItemPrincipal}"/>
+            <MenuItem Header="_Sistema" Style="{StaticResource MenuItemPrincipal}">
+                <MenuItem Header="_Usuarios" Style="{StaticResource MenuItemSubmenu}"
+                          Click="AltaUsuario_Click"/>
+                <Separator/>
+                <MenuItem Header="_Salir" Click="MenuSalir_Click" 
+                  Style="{StaticResource MenuItemSubmenu}"/>
+            </MenuItem>
+        </Menu>
+
+
+    </Grid>
+</UserControl>

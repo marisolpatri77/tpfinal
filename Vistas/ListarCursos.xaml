@@ -1,0 +1,203 @@
+﻿<Window x:Class="Vistas.ListarCursos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:svc="clr-namespace:ClasesBase.DataAccess;assembly=ClasesBase"
+        Title="Listado de Cursos" 
+        Height="600" Width="1014"
+        WindowStartupLocation="CenterScreen" 
+        Background="{StaticResource ColorFondo}"
+        Icon="/Images/logo-lujan.png">
+
+    <Window.Resources>
+        <ObjectDataProvider
+            x:Key="list_cursos"
+            ObjectType="{x:Type svc:TrabajarCursos}"
+            MethodName="TraerCursos"/>
+    </Window.Resources>
+    
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ENCABEZADO CON TÍTULO Y LOGO -->
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- TÍTULO PRINCIPAL -->
+            <Label Content="LISTADO DE CURSOS" 
+                   Style="{StaticResource LabelTitulo}" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Grid.Column="0" Grid.ColumnSpan="2"/>
+
+            <!-- LOGO EN ESQUINA SUPERIOR DERECHA -->
+            <Image Source="/Images/logo-lujan.png" Grid.Column="1"
+                   Width="60" Height="60" 
+                   HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- CONTENEDOR PRINCIPAL -->
+        <Border Grid.Row="1" 
+                Style="{StaticResource AreaContenido}"
+                Padding="15" Margin="-11,1,11,49" Grid.RowSpan="2">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- BARRA DE HERRAMIENTAS -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            Margin="0,0,0,15">
+                    <Button Name="btnNuevoCurso" Content="Nuevo Curso" 
+                            Style="{StaticResource BotonGuardar}"
+                            Click="btnNuevoCurso_Click"
+                            Margin="5,0"/>
+
+                    <Button Name="btnEditar" Content="Editar Curso"
+                            Style="{StaticResource BotonGuardar}"
+                            Click="btnEditar_Click"
+                            Margin="5,0"/>
+
+                    <Button Name="btnEliminar" Content="Eliminar Curso" 
+                            Style="{StaticResource BotonCancelar}"
+                            Click="btnEliminar_Click"
+                            Margin="5,0"/>
+                    
+                </StackPanel>
+
+                <!-- GRILLA DE CURSOS -->
+                <DataGrid Grid.Row="1" 
+                         Name="dgCursos"
+                         AutoGenerateColumns="False"
+                         CanUserAddRows="False"
+                         CanUserDeleteRows="False"
+                         CanUserReorderColumns="False"
+                         CanUserResizeRows="False"
+                         CanUserSortColumns="True"
+                         SelectionMode="Single"
+                         SelectionUnit="FullRow"
+                         GridLinesVisibility="Horizontal"
+                         HeadersVisibility="Column"
+                         BorderBrush="{StaticResource ColorBordeInput}"
+                         BorderThickness="1"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         ItemsSource="{Binding Source={StaticResource list_cursos}}" >
+
+                    <DataGrid.Columns>
+                        <!-- ID Curso -->
+                        <DataGridTextColumn Header="ID" 
+                                          Binding="{Binding Path=IDCurso}"
+                                          Width="40"
+                                          IsReadOnly="True"/>
+
+                        <!-- Nombre -->
+                        <DataGridTextColumn Header="Nombre del Curso" 
+                                          Binding="{Binding Path= Nombre}"
+                                          Width="150"/>
+
+                        <!-- Descripción -->
+                        <DataGridTextColumn Header="Descripción" 
+                                          Binding="{Binding Path=Descripcion}"
+                                          Width="250"/>
+
+                        <!-- Cupo -->
+                        <DataGridTextColumn Header="Cupo" 
+                                          Binding="{Binding Path=Cupo}"
+                                          Width="60"/>
+
+                        <!-- Fecha Inicio -->
+                        <DataGridTextColumn Header="Fecha Inicio" 
+                                          Binding="{Binding Path=FechaInicio, StringFormat=dd/MM/yyyy}"
+                                          Width="100"/>
+
+                        <!-- Fecha Fin -->
+                        <DataGridTextColumn Header="Fecha Fin" 
+                                          Binding="{Binding Path=FechaFin, StringFormat=dd/MM/yyyy}"
+                                          Width="100"/>
+
+                        <!-- Estado ID -->
+                        <DataGridTextColumn Header="Estado" 
+                                          Binding="{Binding Path=Estado}"
+                                          Width="80"/>
+
+                        <!-- Docente ID -->
+                        <DataGridTextColumn Header="Docente" 
+                                          Binding="{Binding Path=Docente}"
+                                          Width="100"/>
+                    </DataGrid.Columns>
+
+                    <!-- ESTILOS PARA MEJORAR LA APARIENCIA USANDO TU PALETA -->
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="{StaticResource ColorPrimario}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Padding" Value="10,5"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="FontFamily" Value="Montserrat"/>
+                            <Setter Property="FontSize" Value="13"/>
+                        </Style>
+
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="FontFamily" Value="Montserrat"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ColorClaro}"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ColorSecundario}"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Padding" Value="10,5"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ColorTexto}"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Background" Value="{StaticResource ColorSecundario}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+
+                <!-- INFORMACIÓN DE REGISTROS -->
+                <TextBlock Grid.Row="2" 
+                          Name="txtInfoRegistros"
+                          Margin="0,10,0,0"
+                          HorizontalAlignment="Right"
+                          FontStyle="Italic"
+                          Foreground="{StaticResource ColorTextoSecundario}"
+                          FontFamily="Montserrat"
+                          FontSize="12"
+                          Text="{Binding Source={StaticResource list_cursos}, Path=Count, StringFormat='Total de cursos: {0}'}"/>
+            </Grid>
+        </Border>
+
+        <!-- BOTONES DE ACCIÓN -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,15,0,0">
+            <Button Name="btnCerrar" Content="Cerrar" 
+                    Style="{StaticResource BotonCancelar}" 
+                    Click="btnCerrar_Click" Margin="0,0,15,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

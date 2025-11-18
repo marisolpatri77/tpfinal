@@ -1,0 +1,122 @@
+﻿<Window x:Class="Vistas.ListadoUsuarios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:data="clr-namespace:ClasesBase.DataAccess;assembly=ClasesBase"
+        Title="Listado de Usuarios" Height="450" Width="600"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource ColorFondo}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Plantillas/PlantillaMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <ObjectDataProvider x:Key="LIST_ALL_USERS"
+                                ObjectType="{x:Type data:TrabajarUsuario}"
+                                MethodName="TraerUsuarios"/>
+
+            <CollectionViewSource x:Key="VISTA_USUARIOS"
+                                  Source="{StaticResource LIST_ALL_USERS}"
+                                  Filter="FiltroUsuarios_Filter">
+
+                <CollectionViewSource.SortDescriptions>
+                    <sys:SortDescription PropertyName="Usu_NombreUsuario" Direction="Ascending"/>
+                </CollectionViewSource.SortDescriptions>
+
+            </CollectionViewSource>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="LISTADO DE USUARIOS" 
+               Style="{StaticResource LabelTitulo}" 
+               HorizontalAlignment="Center" Margin="0,0,0,15"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Content="Buscar por Nombre de Usuario:" 
+                   VerticalAlignment="Center" 
+                   FontWeight="SemiBold"/>
+            <TextBox Name="txtFiltroUsuario" Width="250" 
+                     Style="{StaticResource InputTexto}"
+                     TextChanged="txtFiltroUsuario_TextChanged"/>
+        </StackPanel>
+
+        <ListView Grid.Row="2"
+          Name="lstUsuarios"
+          ItemsSource="{Binding Source={StaticResource VISTA_USUARIOS}}"
+          BorderBrush="{StaticResource ColorBordeInput}"
+          BorderThickness="1"
+          ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+            <ListView.Resources>
+                <!-- Estilo del encabezado (GridViewColumnHeader) -->
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Background" Value="{StaticResource ColorPrimario}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontFamily" Value="Montserrat"/>
+                    <Setter Property="FontSize" Value="13"/>
+                </Style>
+
+                <!-- Estilo de las filas -->
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="FontFamily" Value="Montserrat"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <Setter Property="Foreground" Value="{StaticResource ColorTexto}"/>
+                    <Style.Triggers>
+                        <!-- Al pasar el mouse -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource ColorClaro}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <!-- Al seleccionar -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{StaticResource ColorSecundario}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>
+
+            <!-- Estructura del contenido (no se modifica tu lógica) -->
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Apellido y Nombre" Width="180"
+                            DisplayMemberBinding="{Binding Usu_ApellidoNombre}"/>
+                    <GridViewColumn Header="Nombre de Usuario" Width="150"
+                            DisplayMemberBinding="{Binding Usu_NombreUsuario}"/>
+                    <GridViewColumn Header="Rol" Width="120"
+                            DisplayMemberBinding="{Binding Rol.Rol_Descripcion}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+
+            <Button Name="btnVistaPrevia" Content="Vista Previa" 
+                    Style="{StaticResource BotonAccesoRapido}" 
+                    Margin="0,0,10,0"
+                    Click="btnVistaPrevia_Click"/>
+
+            <Button Name="btnCerrar" Content="Cerrar" 
+                    Style="{StaticResource BotonCancelar}" 
+                    Click="btnCerrar_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
